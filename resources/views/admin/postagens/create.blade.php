@@ -5,7 +5,8 @@
 @section('conteudo')
 
     <h1 class="text-secondary">Criar Nova Postagem</h1>
-    <form action="" method="POST">
+    <form action="{{ route('postagens.store') }}" method="POST">
+    @csrf
         <div class="form-group">
             <label for="titulo" class="text-primary">Título da Postagem:</label>
             <input type="text" class="form-control" name="titulo" id="titulo">
@@ -20,5 +21,7 @@
             <label for="texto" class="text-primary">Texto da Postagem:</label>
             <textarea class="form-control" name="texto" id="" cols="30" rows="10"></textarea>
         </div>
+
+        <button class="btn btn-primary" type="submit">Postar</button>
     </form> 
 @endsection
