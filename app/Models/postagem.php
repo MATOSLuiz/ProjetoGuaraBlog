@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class postagem extends Model
 {
+    protected $table = 'postagens';
+    protected $fillable = ['titulo','subtitulo','texto','imagem','visualizacoes'];
+
     use softDeletes;
     use HasFactory;
 }
