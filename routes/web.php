@@ -21,5 +21,7 @@ Route::get('/', function () {
 Route::get('/postagens', [PostagemController::class, 'index'])->name('postagens.index');
 Route::get('/postagens/nova', [PostagemController::class, 'create'])->name('postagens.create');
 Route::get('/postagens/{id}', [PostagemController::class, 'show'])->name('postagens.show');
+Route::get('/postagens/editar/{id}', [PostagemController::class, 'edit'])->name('postagens.edit');
 
 Route::post('/postagens', [PostagemController::class, 'store'])->name('postagens.store');
+Route::put('/postagens/{id}', [PostagemController::class, 'update'])->name('postagens.update');

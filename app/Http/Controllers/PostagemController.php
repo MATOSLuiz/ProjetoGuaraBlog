@@ -20,7 +20,17 @@ class PostagemController extends Controller
         $postagem = Postagem::create($request->all());
         return redirect()
         ->route('postagens.show', $postagem->id)
-        ->with('mensagem',"Publicação Postada com sucesso!");
+        ->with('mensagem','Publicação Postada com sucesso!');
+    }
+
+    public function update(StoreUpdatePostagens $request, $id){
+        if(!$postagem = postagem::find($id))
+            return redirect()->back();
+        $postagem->update($request->all());
+
+        return redirect()
+        ->route('postagens.edit', $postagem->id)
+        ->with('mensagem','Postagem editada com sucesso');
     }
 
     public function show($id){
@@ -29,5 +39,14 @@ class PostagemController extends Controller
         if(!$postagem)
             return redirect()->route('postagens.index');
         return view('admin.postagens.show', compact('postagem'));
+    }
+
+    public function edit($id){
+        $postagem = postagem::find($id); 
+        
+        if (!$postagem)
+            return redirect()->back();
+        return view('admin.postagens.edit', compact('postagem'));
+    
     }
 }
