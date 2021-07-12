@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/postagens', [PostagemController::class, 'index'])->name('postagens.index');
+Route::get('/postagens/nova', [PostagemController::class, 'create'])->name('postagens.create');
