@@ -5,6 +5,17 @@
 @section('conteudo')
 
     <h1 class="text-secondary">Criar Nova Postagem</h1>
+
+    @if ($errors->any())
+        <p class="text-danger"><strong>Atenção! </strong>As informações inseridas não são válidas</p>
+        
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+         </ul>
+    @endif
+   
     <form action="{{ route('postagens.store') }}" method="POST">
     @csrf
         <div class="form-group">

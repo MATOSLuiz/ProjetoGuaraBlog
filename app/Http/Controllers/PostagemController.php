@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUpdatePostagens;
 use App\Models\postagem;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class PostagemController extends Controller
         return view('admin.postagens.create');
     }
 
-    public function store(Request $request){
+    public function store(StoreUpdatePostagens $request){
         $postagem = Postagem::create($request->all());
         return redirect()
         ->route('postagens.show', $postagem->id)
