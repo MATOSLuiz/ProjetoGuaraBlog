@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class PostagemController extends Controller
 {
     public function index(){
-        return view('admin.postagens.index');
+        $postagens = postagem::all();
+        return view('admin.postagens.index', compact('postagens'));
     }
 
     public function create(){
@@ -48,5 +49,19 @@ class PostagemController extends Controller
             return redirect()->back();
         return view('admin.postagens.edit', compact('postagem'));
     
+    }
+
+    public function destroy($id){
+        $postagem = postagem::find($id);
+
+        if (!$postagem) 
+            return redirect()->route('postagens.index');
+
+            $postagem->delete();
+
+            return redirect()
+                ->route('postagens.index')
+                ->with('mensagem','Postagem deletada com sucesso!');
+        
     }
 }
