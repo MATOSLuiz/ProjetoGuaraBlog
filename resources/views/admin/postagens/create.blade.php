@@ -1,5 +1,10 @@
 @extends('admin.layout.app')
 
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="{{ route('postagens.index') }}">Postagens</a></li>   
+    <li class="breadcrumb-item" aria-current="page">Editar Postagem</li> 
+@endsection
+
 @section('title','BlogEtec||Criar Nova Postagem')
 
 @section('conteudo')

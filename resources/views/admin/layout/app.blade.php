@@ -10,7 +10,14 @@
     </title>
 </head>
 <body>
+    @include('admin.layout.templates.navbar')
     <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mt-2">
+                <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Início</a></li>
+                @yield('breadcrumb')
+            </ol>
+        </nav>
         @yield('conteudo')
     </div>
 </body>

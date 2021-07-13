@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/', function () {
+    return view('admin.layout.home');
+})->name('admin.home');
+
 Route::get('/postagens', [PostagemController::class, 'index'])->name('postagens.index');
 Route::get('/postagens/nova', [PostagemController::class, 'create'])->name('postagens.create');
 Route::get('/postagens/{id}', [PostagemController::class, 'show'])->name('postagens.show');

@@ -1,9 +1,14 @@
 @extends('admin.layout.app')
 
+@section('breadcrumb')  
+<li class="breadcrumb-item" aria-current="page">Lista de Postagens</li>
+    
+@endsection
+
 @section('title','Home/Lista de Postagens')
 
 @section('conteudo')
-    <h1 class="Display-3">Bem vindo ao BlogEtec!</h1>
+    <h1 class="Display-3">Bem vindo ao GuaraBlog!</h1>
     <a href= "{{ route('postagens.create') }}" class="btn btn-success">Criar Nova Postagem</a>
     <hr>
 
