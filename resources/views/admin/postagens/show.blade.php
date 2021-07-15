@@ -9,10 +9,24 @@
 
 @section('conteudo')
 
-<div id="infopostagem" class="list-group">
-  <h1 class="display-4">{{ $postagem->titulo }}</h1>
-  <li class="list-group-item list-group-item-action">{{ $postagem->subtitulo }}</li>
-  <li class="list-group-item list-group-item-action">{{ $postagem->texto }}</li>
+<div class="row">
+    <div class="col">
+        <img class="img img-thumbnail img-fluid" src="{{ url("storage/{$postagem->imagem}") }}" alt="{{ $postagem->titulo }}">
+    </div>
+    <div class="col">
+        <h1 class="display-1 text-center">
+            {{ $postagem->titulo }}
+        </h1>
+    </div>
 </div>
-   </ol>
+
+<h2 class="text-muted" >
+    {{ $postagem->subtitulo }}
+</h2>
+
+<p>
+    {{ $postagem->texto }}
+</p>
+  
+
 @endsection

@@ -6,6 +6,9 @@ use App\Http\Requests\StoreUpdatePostagens;
 use App\Models\postagem;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
 class PostagemController extends Controller
 {
     public function index(){
@@ -18,16 +21,41 @@ class PostagemController extends Controller
     }
 
     public function store(StoreUpdatePostagens $request){
-        $postagem = Postagem::create($request->all());
+        $dados = $request->all();
+
+        if($request->imagem && $request->imagem->isValid()) {
+            $nome_imagem = Str::of($request->titulo . date('dmYHis'))->slug('-') . '.' . 
+            $request->imagem->getClientOriginalExtension();  
+
+            $imagem = $request->imagem->storeAs('postagem', $nome_imagem);
+            $dados['imagem'] = $imagem;
+                
+        }
+
+        $postagem = Postagem::create($dados);
         return redirect()
-        ->route('postagens.show', $postagem->id)
-        ->with('mensagem','Publicação Postada com sucesso!');
+            ->route('postagens.show', $postagem->id)
+            ->with('mensagem','Publicação Postada com sucesso!');
     }
 
     public function update(StoreUpdatePostagens $request, $id){
         if(!$postagem = postagem::find($id))
             return redirect()->back();
-        $postagem->update($request->all());
+
+        $dados = $request->all();
+
+        if ($request->imagem && $request->imagem->isValid()) {
+           if(Storage::exists($postagem->imagem))
+                Storage::delete($postagem->imagem);
+           
+            $nome_imagem = Str::of($request->titulo . date('dmYHis'))->slug('-') . '.' .
+            $request->imagem->getClientOriginalExtension();
+
+            $imagem = $request->imagem->storeAs('postagem', $nome_imagem);
+            $dados['imagem'] = $imagem;
+        }
+
+        $postagem->update($dados);
 
         return redirect()
         ->route('postagens.edit', $postagem->id)
@@ -56,6 +84,9 @@ class PostagemController extends Controller
 
         if (!$postagem) 
             return redirect()->route('postagens.index');
+
+        if (Storage::exists($postagem->imagem))
+            Storage::delete($postagem->imagem);
 
             $postagem->delete();
 

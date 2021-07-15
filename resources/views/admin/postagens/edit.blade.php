@@ -9,7 +9,7 @@
 
 @section('conteudo')
 
-    <h1 class="text-secondary">Editando- {{ $postagem->titulo }}</h1>
+    <h1>Editando- {{ $postagem->titulo }}</h1>
 
     @if ($errors->any())
         <p class="text-danger"><strong>Atenção! </strong>As informações inseridas não são válidas</p>
@@ -31,22 +31,29 @@
        
    @endif
    
-    <form action="{{ route('postagens.update', $postagem->id) }}" method="POST">
+    <form enctype="multipart/form-data"  action="{{ route('postagens.update', $postagem->id) }}" method="POST">
     @csrf
     @method('put')
         <div class="form-group">
-            <label for="titulo" class="text-primary">Título da Postagem:</label>
+            <label for="titulo">Título da Postagem:</label>
             <input value="{{ $postagem->titulo ?? old('titulo') }}" type="text" class="form-control" name="titulo" id="titulo">
         </div>
 
         <div class="form-group">
-            <label for="subtitulo" class="text-primary">Subtítulo:</label>
+            <label for="subtitulo">Subtítulo:</label>
             <input value="{{ $postagem->subtitulo ?? old('subtitulo') }}" type="text" class="form-control" name="subtitulo" id="subtitulo">
         </div>
 
         <div class="form-group">
-            <label for="texto" class="text-primary">Texto da Postagem:</label>
+            <label for="texto">Texto da Postagem:</label>
             <textarea class="form-control" name="texto" id="" cols="30" rows="10">{{ $postagem->texto ?? old('texto') }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <img class="img img-thumbnail img-fluid" src="{{ url("storage/{$postagem->imagem}") }}" alt="{{ $postagem->titulo }}">
+
+            <label for="imagem">Selecione a Imagem principal:</label>
+            <input type="file" class="form-control-file" id="imagem" name="imagem">
         </div>
 
         <button class="btn btn-primary float-right" type="submit">Salvar alterações</button>
