@@ -17,8 +17,16 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->integer('id_etec')->default(0);
+            $table->date('data_nascimento')->nullable();
+            $table->longText('curso')->nullable()->default('');
+            $table->string('foto_perfil')->nullable()->default('');
+
+            $table->timestamp('email_verified_at')->nullable();
+            
+
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });
