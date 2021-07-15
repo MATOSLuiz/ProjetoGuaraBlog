@@ -14,7 +14,7 @@
         <img class="img img-thumbnail img-fluid" src="{{ url("storage/{$postagem->imagem}") }}" alt="{{ $postagem->titulo }}">
     </div>
     <div class="col">
-        <h1 class="display-1 text-center">
+        <h1 class="display-2 text-center">
             {{ $postagem->titulo }}
         </h1>
     </div>
