@@ -13,4 +13,8 @@ class postagem extends Model
 
     use softDeletes;
     use HasFactory;
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

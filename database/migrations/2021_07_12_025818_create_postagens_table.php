@@ -21,6 +21,8 @@ class CreatePostagensTable extends Migration
             $table->string('imagem')->nullable()->default('');
             $table->string('visualizacoes')->nulllable()->default(0);
 
+            $table->foreignId('user_id')->constrained();
+
             $table->softDeletes();
             $table->timestamps();
         });
