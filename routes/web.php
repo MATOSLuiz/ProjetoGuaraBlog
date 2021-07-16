@@ -1,6 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\{
+    PostagemController,
+    
+
+};
+use App\Http\Controllers\Auth\RegisteredUserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,26 +20,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     return view('admin.layout.home');
 })->name('admin.home');
 
-Route::get('/postagens', [PostagemController::class, 'index'])->name('postagens.index');
-Route::get('/postagens/nova', [PostagemController::class, 'create'])->name('postagens.create');
-Route::get('/postagens/{id}', [PostagemController::class, 'show'])->name('postagens.show');
-Route::get('/postagens/editar/{id}', [PostagemController::class, 'edit'])->name('postagens.edit');
+Route::group(['prefix'=>'admin'], function(){
+    Route::get('/postagens', [PostagemController::class, 'index'])->name('postagens.index');
+    Route::get('/postagens/nova', [PostagemController::class, 'create'])->name('postagens.create');
+    Route::get('/postagens/{id}', [PostagemController::class, 'show'])->name('postagens.show');
+    Route::get('/postagens/editar/{id}', [PostagemController::class, 'edit'])->name('postagens.edit');
 
-Route::post('/postagens', [PostagemController::class, 'store'])->name('postagens.store');
-Route::put('/postagens/{id}', [PostagemController::class, 'update'])->name('postagens.update');
-Route::delete('/postagens/{id}', [PostagemController::class, 'destroy'])->name('postagens.destroy');
-
+    Route::post('/postagens', [PostagemController::class, 'store'])->name('postagens.store');
+    Route::put('/postagens/{id}', [PostagemController::class, 'update'])->name('postagens.update');
+    Route::delete('/postagens/{id}', [PostagemController::class, 'destroy'])->name('postagens.destroy');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+require __DIR__ . '/site.php';
