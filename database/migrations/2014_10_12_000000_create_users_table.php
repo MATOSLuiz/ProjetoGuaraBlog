@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('id_etec')->default(0);
+            $table->integer('etec_id')->default(0);
             $table->date('data_nascimento')->nullable();
             $table->longText('curso')->nullable()->default('');
             $table->string('foto_perfil')->nullable()->default('');
