@@ -27,6 +27,8 @@ class PostagemTeste extends TestCase
     }
 
     public function teste_admin_postagens_create(){
-        //Testa se a página de postagens está acessivel e se possui a informação 'postagens'
+        //Testa se a página de criação de postagem está acessivel e se possui a informação 'postagens'
+        $this->get('/admin/postagens/nova')->assertStatus(200);
+        $this->get('/admin/postagens/nova')->assertSee('postagens');
     }
 }
