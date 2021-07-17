@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUpdatePostagens;
 use App\Models\postagem;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -31,6 +31,8 @@ class PostagemController extends Controller
             $dados['imagem'] = $imagem;
                 
         }
+
+        $dados['user_id'] = Auth::user()->id;
 
         $postagem = Postagem::create($dados);
         return redirect()

@@ -21,9 +21,6 @@
           {{-- <divclass="dropdown-divider"></div> --}}
         </div>
       </li>
-    {{--<li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>--}}
     </ul>
 
     {{--  <form class="form-inline my-2 my-lg-0">
@@ -31,5 +28,20 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>--}}
 
+    <form method="POST" action="{{ route('sair') }}">
+    @csrf
+      <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ Auth::user()->name }}
+          </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a href="#" class="dropdown-item">Perfil</a>
+          <a class="dropdown-item" href="{{ route('sair') }}" onclick="confirm('Deseja sair do sistema?')">Sair</a>
+        </li>
+        
+      </ul>
+    </form>
   </div>
 </nav>

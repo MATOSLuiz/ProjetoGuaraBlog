@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     PostagemController,
+    AdminController
     
 
 };
@@ -20,12 +21,10 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 |
 */
 
+Route::group(['prefix'=>'admin', 'middleware'=> 'auth'], function(){
 
-Route::get('/admin', function () {
-    return view('admin.layout.home');
-})->name('admin.home');
+    Route::get('/', [AdminController::class, 'index'])->name('admin.home');
 
-Route::group(['prefix'=>'admin'], function(){
     Route::get('/postagens', [PostagemController::class, 'index'])->name('postagens.index');
     Route::get('/postagens/nova', [PostagemController::class, 'create'])->name('postagens.create');
     Route::get('/postagens/{id}', [PostagemController::class, 'show'])->name('postagens.show');
@@ -36,9 +35,5 @@ Route::group(['prefix'=>'admin'], function(){
     Route::delete('/postagens/{id}', [PostagemController::class, 'destroy'])->name('postagens.destroy');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-require __DIR__.'/auth.php';
+//require __DIR__.'/auth.php';
 require __DIR__ . '/site.php';
