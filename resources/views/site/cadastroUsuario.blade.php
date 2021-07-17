@@ -31,13 +31,13 @@
             <div class="col-6">
                 <div class="form-group">
                     <label for="password">Senha:</label>
-                    <input type="text" name="password" id="password" class="form-control">
+                    <input type="password" name="password" id="password" class="form-control">
                  </div>
             </div>
             <div class="col-6">
                 <div class="form-group">
                     <label for="password_confirmation">Confirme a senha:</label>
-                    <input type="text" name="password_confirmation" id="password_confirmation" class="form-control">
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
                 </div>
             </div>
         </div>
@@ -46,7 +46,12 @@
             <div class="col-6">
                 <div class="form-group">
                     <label for="etec_id">Selecione sua ETEC</label>
-                    <select class="form-control" name="etec_id" id="etec_id"></select>
+                    <select class="form-control" name="etec_id" id="etec_id">
+                    
+                        @foreach ($etecs as $etec)
+                            <option value="{{ $etec->id }}">{{ $etec->codigo . '-' . $etec->nome }}</option>        
+                        @endforeach
+                    </select>   
                 </div>
             </div>
 
