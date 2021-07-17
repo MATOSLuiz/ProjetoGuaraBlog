@@ -23,6 +23,9 @@
    
     <form enctype="multipart/form-data" action="{{ route('postagens.store') }}" method="POST">
     @csrf
+
+    <input type="hidden" name="user_id" value="1">
+    
         <div class="form-group">
             <label for="titulo">Título da Postagem:</label>
             <input value="{{ $postagem->titulo ?? old('titulo') }}" type="text" class="form-control" name="titulo" id="titulo">
