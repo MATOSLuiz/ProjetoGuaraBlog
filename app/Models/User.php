@@ -47,7 +47,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function postagen(){
+    public function postagens(){
         return $this->hasMany(Postagem::class);
+    }
+
+    public function comentarios(){   
+        return $this->hasMany(Comentario::class);
     }
 }

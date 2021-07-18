@@ -3,9 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     PostagemController,
-    AdminController
-    
-
+    AdminController,
+    ComentariosController
 };
 use App\Http\Controllers\Auth\{
     RegisteredUserController
@@ -35,7 +34,11 @@ Route::group(['prefix'=>'admin', 'middleware'=> 'auth'], function(){
     Route::put('/postagens/{id}', [PostagemController::class, 'update'])->name('postagens.update');
     Route::delete('/postagens/{id}', [PostagemController::class, 'destroy'])->name('postagens.destroy');
     
+    // ROTA DE USUARIO
     Route::get('/perfil', [RegisteredUserController::class, 'edit'])->name('user.edit');
+    // ROTAS PARA OS COMENTARIOS
+    Route::post('/comentarios', [ComentariosController::class, 'store'])->name('comentarios.store');
+    Route::delete('/comentarios/{id}', [ComentariosController::class, 'destroy'])->name('comentarios.destroy');
 });
     
 
