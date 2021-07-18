@@ -8,8 +8,10 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Str;
 
 class RegisteredUserController extends Controller
 {
@@ -23,6 +25,13 @@ class RegisteredUserController extends Controller
         return view('auth.register');
     }
 
+    
+    public function edit(){
+        $etecs = DB::table('etecs')->orderBy('codigo', 'ASC')->get();
+        $usuario = Auth::user();
+
+        return view('admin.user.edit', compact('etecs','usuario'));
+    }
     /**
      * Handle an incoming registration request.
      *
@@ -37,11 +46,20 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'foto_perfil' => 'nullable|image'
         ]);
 
         $data = $request->all();
-
         $data['password'] = Hash::make($request->password);
+
+        if($request->foto_perfil && $request->foto_perfil->isValid()){
+            $nome_imagem = Str::of($request->name . date('dmYHis'))->slug('-');
+            $extensao = $request->foto_perfil->getClientOriginalExtension();
+            $nome_imagem = $nome_imagem . '.' . $extensao;
+
+            $imagem = $request->foto_perfil->storeAs('usuario', $nome_imagem);
+            $data['foto_perfil'] = $imagem;
+        }
 
         $user = User::create($data);
 
@@ -49,6 +67,8 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()
+            ->route('admin.home')
+            ->with('mensagem', 'Cadastro criado com sucesso!');
     }
 }

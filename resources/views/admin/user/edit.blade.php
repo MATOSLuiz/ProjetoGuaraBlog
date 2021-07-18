@@ -1,10 +1,14 @@
-@extends('site.index')
+@extends('admin.layout.app')
 
-@section('titulo', 'Cadastro de Usuário')
+@section('breadcrumb')
+<li class="breadcrumb-item active" aria-current="page">Meu Perfil</a></li>
+@endsection
+
+@section('title', 'Admin - Perfil')
 
 @section('conteudo')
 
-    <h1>Novo Usuário|GuaraBlog</h1>
+    <h1>Atualizar Dados do cadastro</h1>
         @if ($errors->any())
             <p class="text-danger"><strong>Atenção! </strong>As informações inseridas não são válidas</p>
         
@@ -15,16 +19,21 @@
             </ul>
         @endif
 
-    <form enctype="multipart/form-data" class="form" action="{{ route('site.usuarios.store') }}" method="POST">
+    <form class="form" action="{{ route('site.usuarios.store') }}" method="POST">
     @csrf   
         <div class="form-group">
             <label for="name">Nome:</label>
-            <input type="text" name="name" id="name" class="form-control">
+            <input type="text" name="name" id="name" class="form-control" value="{{ $usuario->name }}">
         </div>
 
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="text" name="email" id="email" class="form-control">
+            <input type="text" name="email" id="email" class="form-control" value="{{ $usuario->email }}">
+        </div>
+
+        <div class="form-group">
+            <label for="data_nascimento">Data de Nascimento:</label>
+            <input type="date" name="data_nascimento" id="data_nascimento" class="form-control" value="{{ $usuario->data_nascimento }}">
         </div>
 
         <div class="row">
@@ -58,17 +67,15 @@
             <div class="col-6">
                 <div class="form-group">
                     <label for="curso">Me conte sobre você na ETEC</label>
-                    <textarea name="curso" id="control" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea name="curso" id="control" cols="30" rows="10" class="form-control">{{ $usuario->curso }}</textarea>
                 </div>
             </div>
         </div>     
 
         <div class="form-group">
-            <label for="data_nascimento">Data de Nascimento:</label>
-            <input type="date" name="data_nascimento" id="data_nascimento" class="form-control">
-        </div>
-
-        <div class="form-group">
+             @if (!empty($usuario->foto_perfil))
+                <img class="img img-thumbnail d-block" width="200" height="200" src="{{ url("storage/{$usuario->foto_perfil}" ) }}" alt="{{ $usuario->name }}">
+            @endif
             <label for="foto_perfil">Selecione sua foto de perfil:</label>
             <input class="form-control" type="file" name="foto_perfil" id="foto_perfil">
         </div>

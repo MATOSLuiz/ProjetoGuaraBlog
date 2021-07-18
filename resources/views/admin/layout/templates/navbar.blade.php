@@ -37,10 +37,9 @@
           {{ Auth::user()->name }}
           </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a href="#" class="dropdown-item">Perfil</a>
-          <a class="dropdown-item" href="{{ route('sair') }}" onclick="confirm('Deseja sair do sistema?')">Sair</a>
+          <a href="{{ route('user.edit') }}" class="dropdown-item">Perfil</a>
+          <button type="submit" class="dropdown-item" onclick="confirm('Deseja sair do sistema?')">Sair</button>
         </li>
-        
       </ul>
     </form>
   </div>

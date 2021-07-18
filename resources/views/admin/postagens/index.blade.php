@@ -2,7 +2,6 @@
 
 @section('breadcrumb')  
 <li class="breadcrumb-item" aria-current="page">Lista de Postagens</li>
-    
 @endsection
 
 @section('title','Home/Lista de Postagens')

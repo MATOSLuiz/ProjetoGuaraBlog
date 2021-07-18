@@ -7,8 +7,9 @@ use App\Http\Controllers\{
     
 
 };
-use App\Http\Controllers\Auth\RegisteredUserController;
-
+use App\Http\Controllers\Auth\{
+    RegisteredUserController
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,10 @@ Route::group(['prefix'=>'admin', 'middleware'=> 'auth'], function(){
     Route::post('/postagens', [PostagemController::class, 'store'])->name('postagens.store');
     Route::put('/postagens/{id}', [PostagemController::class, 'update'])->name('postagens.update');
     Route::delete('/postagens/{id}', [PostagemController::class, 'destroy'])->name('postagens.destroy');
+    
+    Route::get('/perfil', [RegisteredUserController::class, 'edit'])->name('user.edit');
 });
+    
 
 //require __DIR__.'/auth.php';
 require __DIR__ . '/site.php';
