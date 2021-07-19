@@ -1,5 +1,7 @@
 {
-    "/js/app.js": "/js/app.js?id=a15a42b61334a7ba3e7a",
+    "/js/app.js": "/js/app.js?id=dae73168d10051287da5",
     "/css/app.css": "/css/app.css?id=c5813ca211ea8e88bd4b",
-    "/css/login.css": "/css/login.css?id=5b8d57309de2f8509db0"
+    "/css/admin.css": "/css/admin.css?id=6734208dff8e97f86cb6",
+    "/css/login.css": "/css/login.css?id=5b8d57309de2f8509db0",
+    "/css/site.css": "/css/site.css?id=68b329da9893e34099c7"
 }

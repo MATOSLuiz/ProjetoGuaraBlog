@@ -17,5 +17,7 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
     require('autoprefixer'),
 ])
 
+.sass('resources/sass/site/site.scss', 'public/css').version()
 .sass('resources/sass/site/login.scss' , 'public/css').version()
+.sass('resources/sass/admin/admin.scss', 'public/css').version()
 .sourceMaps();

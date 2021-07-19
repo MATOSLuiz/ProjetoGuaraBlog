@@ -18,6 +18,7 @@
         <div class="dropdown-menu" aria-labelledby="PostagensDropdown">
           <a class="dropdown-item" href="{{ route('postagens.create') }}">Criar Nova Postagem</a>
           <a class="dropdown-item" href="{{ route('postagens.index') }}">Lista de Postagens</a>
+          <a class="dropdown-item" href="{{ route('site.usuarios.cadastro') }}">Criar novo  usuário</a>
           {{-- <divclass="dropdown-divider"></div> --}}
         </div>
       </li>

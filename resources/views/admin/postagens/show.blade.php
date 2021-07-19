@@ -30,28 +30,45 @@
 
 <hr>
 
-<h2>Comentários</h2>
+<h2 class="mb-4">Comentários</h2>
 
 <div class="comentarios">
     <div class="row">
 
     @foreach ($postagem->comentarios as $comentario)
         
-            <div class="col-3">
+            <div class="col-12">
                 <p class="imagem">
                     {{ $comentario->initials() }}
                 </p>
+                 <div class="comentario">
+                    <p class="texto">{{ $comentario->comentario }} 
+                    </p>
+
+                    <p class="text-muted rodape">
+                        por {{ $comentario->user->name }} em {{ $comentario->created_at->format('d/m/y') }}
+                    </p>
+
+
+                    @if (Auth::user()->id == $comentario->user->id)
+                         <form method="POST" action="{{ route('comentarios.destroy', $comentario->id ) }}">
+                        @csrf
+                        @method('delete')
+
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <button class=" btn btn-danger dropdown-item" onclick="confirm('Deseja realmente apgar seu comentário?')" type="submit">Apagar</button>
+                                </div>  
+                            </div>
+                        </form>
+                    @endif
+                
+                 </div>
             </div>
-            <div class="col-9">
-                <p class="comentario">
-                    {{ $comentario->comentario }}
-                </p>
-            </div>
-            <div class="col-12">
-                <p class="text-muted">
-                        por {{ $comentario->user->name }} em {{ $comentario->created_at }}
-                </p>
-            </div>
+
+            <div class="clearfix"></div>
+
         @endforeach
     </div>
 </div>
@@ -79,9 +96,9 @@
 
     <input type="hidden" name="postagem_id" value="{{ $postagem->id }}">
 
-    <div class="form-group">
+    <div class="form-group mt-4">
         <label for="comentario">Escreva um comentário:</label>
-        <textarea class="form-control" name="comentario" id="comentario" rows="5">{{ old('comentario') }}</textarea>
+        <textarea class="form-control" name="comentario" id="comentario" rows="3">{{ old('comentario') }}</textarea>
     </div>
 
     <button class="btn btn-success" type="submit">Comentar</button>

@@ -20,7 +20,17 @@ class ComentariosController extends Controller
             ->with('mensagem','Comentário enviado com sucesso!');
     }
 
-    public function destroy(Comentario $comentario){
+    public function destroy($id){
+        $comentario = Comentario::find($id);
+
+        if (!$comentario) 
+            return redirect()->route('postagens.index');
+        
+        if (Auth::user()->id <> $comentario->user->id)
+            return redirect()->route('postagens.index')
+                ->with('mensagem', 'Você não pode apagar comentários de outras pessoas');
+        
+
         $comentario->delete();
 
         return redirect()->back()
